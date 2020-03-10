@@ -34,6 +34,7 @@ EOF
 cat >> $SCRIPT << "EOF"
 # bash variables
 k8s_obj_file="deployment.yaml"; str_sec=""
+license_text="LICENSE.txt"
 
 # wso2 subscription variables
 WUMUsername=''; WUMPassword=''
@@ -50,6 +51,13 @@ cat >> $SCRIPT << "EOF"
 : ${namespace:="wso2"}
 
 EOF
+
+echo "function createLicenseText(){" >> $SCRIPT
+echo 'cat > ${license_text} << "EOF"' >> $SCRIPT
+cat eulatxt >> $SCRIPT 
+echo "EOF" >> $SCRIPT; echo "" >> $SCRIPT
+echo "viewLicenseText" >> $SCRIPT; echo "}" >> $SCRIPT
+
 
 echo "function create_yaml(){" >> $SCRIPT
 echo 'cat > $k8s_obj_file << "EOF"' >> $SCRIPT
